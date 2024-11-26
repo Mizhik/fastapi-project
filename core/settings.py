@@ -15,6 +15,9 @@ class Settings(BaseSettings):
     POSTGRES_PORT: int = 5432
     POSTGRES_DB: str = "yourdbname"
 
+    AUTH_SECRET_KEY: str = "secret_key"
+    AUTH_ALGORITHM: str = "auth_algorithm"
+
     @property
     def ASYNC_DATABASE_URL(self) -> str:
         return f"postgresql+asyncpg://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
@@ -30,5 +33,6 @@ class Settings(BaseSettings):
     model_config = ConfigDict(
         extra="ignore", env_file=".env", env_file_encoding="utf-8"
     )
+
 
 config = Settings()

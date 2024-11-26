@@ -5,7 +5,7 @@ from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.ext.asyncio import AsyncSession
 from database.db import get_db
-from routers import pet, user
+from routers import auth, pet, user
 from core.settings import config
 
 app = FastAPI()
@@ -20,7 +20,7 @@ app.add_middleware(
 
 app.include_router(user.router)
 app.include_router(pet.router)
-
+app.include_router(auth.router)
 
 @app.get("/hello")
 async def hello_world():
